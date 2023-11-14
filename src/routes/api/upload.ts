@@ -9,7 +9,7 @@ const storage = multer.diskStorage(
         filename: function (_req, _file, cb) {
             //req.body is empty...
             //How could I get the new_file_name property sent from client here?
-            cb(null, getTransferFilename());
+            cb(null, getTransferFilename("FakeDrop"));
         }
     }
 );
