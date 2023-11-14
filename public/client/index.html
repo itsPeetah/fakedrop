@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fakedrop - Client</title>
+</head>
+
+<body>
+
+    <label for="file-input">Upload files</label>
+    <input type="file" name="files" id="file-input" multiple="multiple">
+    <button onclick="uploadFiles()">Send</button>
+
+
+
+    <script src="/js/jszip.min.js"></script>
+    <script id="input::onchange">
+        const uploadedFiles = {}
+        const fileInput = document.getElementById("file-input")
+        fileInput.onchange = (event) => {
+            const files = Array.from(event.target.files)
+            files.forEach((file) => {
+                uploadedFiles[file.name] = file
+            })
+        }
+    </script>
+    <script id="form::upload">
+
+        const generateBlob = async () => {
+            const zip = new JSZip();
+            Object.keys(uploadedFiles).forEach((file) => {
+                zip.file(file, uploadedFiles[file])
+            })
+            // zip.generateAsync({ type: "blob" }).then((blobdata) => { const zipBlob = new Blob([blobdata]) })
+            const blobdata = await zip.generateAsync({ type: "blob" })
+            const zipBlob = new Blob([blobdata])
+            return zipBlob
+        }
+
+        const uploadFiles = async () => {
+            const blob = await generateBlob()
+
+            var fd = new FormData();
+            fd.append('upl', blob, 'fakedrop.zip');
+
+            fetch(`/api/upload`, { method: "POST", body: fd })
+                .then(response => console.log(response.text()))
+        }
+    </script>
+</body>
+
+</html>

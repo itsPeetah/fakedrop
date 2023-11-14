@@ -8,12 +8,25 @@
 </head>
 
 <body>
-    hi
-    <form method="post" action="/api/upload">
-        <label for="image-input">Upload image</label>
-        <input type="file" name="image_1" id="image-input">
-        <button type="submit">Click me</button>
-    </form>
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    <h1>Fakedrop</h1>
+    <div id="qrcode"></div>
+    <p>Scan the QR code with your phone to open the upload page</p>
+
+    <script id="qrcode::init">
+        (async function () {
+            const res = await fetch("/api/init");
+            const { address, port, client } = await res.json();
+            const qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: client,
+                width: 256,
+                height: 256,
+                colorDark: "#000",
+                colorLight: "#fff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+        })()
+    </script>
 </body>
 
 </html>
