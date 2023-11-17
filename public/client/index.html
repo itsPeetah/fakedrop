@@ -13,42 +13,30 @@
     <input type="file" name="files" id="file-input" multiple="multiple">
     <button onclick="uploadFiles()">Send</button>
 
-
-
     <script src="/js/jszip.min.js"></script>
-    <script id="input::onchange">
-        const uploadedFiles = {}
+    <script id="handle-files">
         const fileInput = document.getElementById("file-input")
         fileInput.onchange = (event) => {
+            console.log("Added files")
             const files = Array.from(event.target.files)
             files.forEach((file) => {
-                uploadedFiles[file.name] = file
-            })
-        }
-    </script>
-    <script id="form::upload">
-
-        const generateBlob = async () => {
-            const zip = new JSZip();
-            Object.keys(uploadedFiles).forEach((file) => {
-                zip.file(file, uploadedFiles[file])
-            })
-            // zip.generateAsync({ type: "blob" }).then((blobdata) => { const zipBlob = new Blob([blobdata]) })
-            const blobdata = await zip.generateAsync({ type: "blob" })
-            const zipBlob = new Blob([blobdata])
-            return zipBlob
+                uploadFile(file)
+            });
+            event.target.value = null
         }
 
-        const uploadFiles = async () => {
-            const blob = await generateBlob()
+        const uploadFile = async (file) => {
 
-            var fd = new FormData();
-            fd.append('upl', blob, 'fakedrop.zip');
+            console.log("Sending:", file.name)
 
-            fetch(`/api/upload`, { method: "POST", body: fd })
+            var data = new FormData()
+            data.append('file', file, file.name)
+
+            fetch(`/api/upload`, { method: "POST", body: data })
                 .then(response => console.log(response.text()))
         }
     </script>
+
 </body>
 
 </html>

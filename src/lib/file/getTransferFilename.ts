@@ -1,3 +1,3 @@
-export default function getTransferFilename(prefix: string = "fakedrop") {
-    return `${prefix}_${Date.now()}.zip`
+export default function getTransferFilename(filename: string = "fakedrop") {
+    return `${Date.now()}_${filename}`
 };
