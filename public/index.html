@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fakedrop</title>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
     <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
-    <h1>Fakedrop</h1>
-    <div id="qrcode"></div>
-    <p>Scan the QR code with your phone to open the upload page</p>
-
+    <div class="container">
+        <div class="box">
+            <h1 class="title">FakeDrop</h1>
+            <a id="qrcode" href="/client"></a>
+            <p>Scan the QR code with your phone to open the upload page</p>
+        </div>
+    </div>
     <script id="qrcode::init">
         (async function () {
             const res = await fetch("/api/init");
