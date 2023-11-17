@@ -5,14 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fakedrop - Client</title>
+    <link rel="stylesheet" href="../css/client.css">
 </head>
 
 <body>
 
-    <label for="file-input">Upload files</label>
-    <input type="file" name="files" id="file-input" multiple="multiple">
-    <button onclick="uploadFiles()">Send</button>
+    <div class="container">
+        <h1>FakeDrop</h1>
+        <p>
+            Your files will be sent to your computer.
+            <br>
+            Find them in the Downloads folder.
+        </p>
+        <div class="box">
+            <label for="file-input">Upload files</label>
+            <input type="file" name="files" id="file-input" multiple="multiple">
+        </div>
 
+    </div>
     <script src="/js/jszip.min.js"></script>
     <script id="handle-files">
         const fileInput = document.getElementById("file-input")
