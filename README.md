@@ -2,7 +2,7 @@
 
 > A "drop-in" cross-platofrm AirDrop alternative.
 
-![Screenshot](./.github/screenshots/index.png)
+![Screenshot](./media/screenshots/index.png)
 
 ## What does it do?
 
