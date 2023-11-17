@@ -27,3 +27,7 @@ Just scan the QR code with your mobile device and send the files from your brows
   - install it globally
   - `$ npm install -g`
   - `$ fakedrop`
+
+### Via npm/npx
+
+- currently working on it :)
