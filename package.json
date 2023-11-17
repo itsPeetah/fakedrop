@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A \"drop-in\" alternative to AirDrop.",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": {
+    "fakedrop":"dist/index.js"
+  },
   "license": "MIT",
   "keywords": [
     "npm",
