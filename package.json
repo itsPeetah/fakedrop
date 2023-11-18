@@ -1,6 +1,6 @@
 {
   "name": "fakedrop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A \"drop-in\" alternative to AirDrop.",
   "main": "dist/index.js",
   "bin": "dist/index.js",
@@ -15,8 +15,7 @@
   "scripts": {
     "build": "tsc --project ./",
     "start:dev": "nodemon src/index.ts",
-    "start:prod": "node dist/index.js",
-    "postinstall": "tsc --project ./"
+    "start:prod": "node dist/index.js"
   },
   "repository": "https://github.com/itspeetah/fakedrop",
   "homepage": "https://github.com/itspeetah/fakedrop#readme",
