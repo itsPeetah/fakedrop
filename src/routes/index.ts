@@ -1,6 +1,9 @@
-import { Router, static as express_static } from 'express';
+import { Router, static as express_static } from "express";
+import path from "path";
 
 const routes = Router();
 
-routes.use("/", express_static("public"))
+const publicRoot = path.resolve(__dirname, "..", "..", "public");
+
+routes.use("/", express_static(publicRoot));
 export default routes;
