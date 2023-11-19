@@ -2,7 +2,7 @@
 
 > A "drop-in" cross-platofrm AirDrop alternative.
 
-![Screenshot](./media/screenshots/index.png)
+![Screenshot Page](./.github/screenshots/index.png)
 
 ## What does it do?
 
@@ -14,7 +14,9 @@ Just scan the QR code with your mobile device and send the files from your brows
 
 ## Usage
 
-### From Source
+![Screenshot Terminal](./.github/screenshots/terminal.png)
+
+### Run from Source
 
 - clone the repository
 - install the depencies
@@ -30,4 +32,7 @@ Just scan the QR code with your mobile device and send the files from your brows
 
 ### Via npm/npx
 
-- currently working on it :)
+- install it globally
+  > `$ npm install fakedrop -g`
+- use it from CLI
+  > `$ fakedrop`
