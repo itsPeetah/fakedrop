@@ -13,15 +13,16 @@
     <div class="container">
         <div class="box">
             <h1 class="title">FakeDrop</h1>
-            <a id="qrcode" href="/client"></a>
+            <a title="client page" id="qrcode" href="/client"></a>
             <p>Scan the QR code with your phone to open the upload page</p>
-            <a href="https://github.com/itsPeetah" target="_blank" style="font-size: small;">made by @itsPeetah</a>
+            <a href="https://github.com/itsPeetah" target="_blank" style="font-size:small;">made by @itsPeetah</a>
         </div>
     </div>
     <script id="qrcode::init">
         (async function () {
             const res = await fetch("/api/init");
             const { address, port, client } = await res.json();
+            // console.log(client)
             const qrcode = new QRCode(document.getElementById("qrcode"), {
                 text: client,
                 width: 256,
