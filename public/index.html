@@ -24,7 +24,7 @@
             const { address, port, client } = await res.json();
             // console.log(client)
             const qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: client,
+                text: `http://${address}:${port}/client`,
                 width: 256,
                 height: 256,
                 colorDark: "#000",
