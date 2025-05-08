@@ -32,9 +32,7 @@ What it looks like in the terminal
 
 What it looks like on your phone
 
-<div>
-<img src="./.github/screenshots/phone.png" style="max-height:400px; margin: 0px auto;display:block"></img>
-<div>
+![Screenshot Phone](./.github/screenshots/phonesmall.png)
 
 ## Disclaimer
 
