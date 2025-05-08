@@ -52,7 +52,11 @@
         const request = fetchFormPost("/api/upload", data, (e) => {
           console.log("progress");
           const { loaded, total } = e;
-          newItalic.textContent = `${(loaded / total) * 100}%`;
+
+          // it's a little scuffed of a way to round the float but yolo
+          const percent = parseInt((loaded / total) * 10000) / 100;
+
+          newItalic.textContent = `${percent}%`;
         });
 
         return request;
