@@ -19,18 +19,25 @@
         <label for="file-input">Upload files</label>
         <input type="file" name="files" id="file-input" multiple="multiple" />
       </div>
+      <h3 id="file-counter"></h3>
       <div id="upload-container"></div>
     </div>
     <script id="handle-files">
       const fileInput = document.getElementById("file-input");
       const fileContainer = document.getElementById("upload-container");
+      const fileCounter = document.getElementById("file-counter");
+
+      let filesTotal = 0;
+      let filesCompleted = 0;
 
       fileInput.onchange = (event) => {
         console.log("Added files");
         const files = Array.from(event.target.files);
+        filesTotal = files.length;
+        filesCompleted = 0;
         event.target.value = null;
-        files.forEach((file) => {
-          uploadFile(file);
+        files.forEach(async (file) => {
+          uploadFile(file).then(updateFileCounter);
         });
       };
 
@@ -92,6 +99,11 @@
           xhr.open("post", url, true);
           xhr.send(data);
         });
+      }
+
+      function updateFileCounter() {
+        filesCompleted += 1;
+        fileCounter.textContent = `Uploaded ${filesCompleted} of ${filesTotal} files`;
       }
     </script>
   </body>

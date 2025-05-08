@@ -1,6 +1,6 @@
 {
   "name": "fakedrop",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A \"drop-in\" alternative to AirDrop.",
   "main": "dist/index.js",
   "bin": {
