@@ -29,7 +29,7 @@ Just scan the QR code with your mobile device and send the files from your brows
 - install the package
   > `$ npm install fakedrop -g`
 - run
-  > `$ npx fakedrop`
+  > `$ npx fakedrop` or just `$ fakedrop`
 
 ### Screenshots
 
