@@ -24,6 +24,13 @@ Just scan the QR code with your mobile device and send the files from your brows
 - run
   > `$ yarn start:prod` or `$ npm run start:prod`
 
+### Run the package
+
+- install the package
+  > `$ npm install fakedrop -g`
+- run
+  > `$ npx fakedrop`
+
 ### Screenshots
 
 What it looks like in the terminal

@@ -10,25 +10,32 @@ const getTransferFilename_1 = __importDefault(require("../../lib/file/getTransfe
 const path_1 = __importDefault(require("path"));
 const fs_1 = require("fs");
 const destination = path_1.default.join((0, downloads_folder_1.default)(), "/FakeDrop");
+if (!(0, fs_1.existsSync)(destination))
+    (0, fs_1.mkdir)(destination, (err) => {
+        if (err)
+            console.log(err.message);
+        else
+            console.log("Created /FakeDrop folder in Downloads");
+    });
 const storage = multer_1.default.diskStorage({
     destination,
     filename: function (_req, file, cb) {
-        if (!(0, fs_1.existsSync)(destination))
-            (0, fs_1.mkdir)(destination, (err) => {
-                if (err)
-                    console.log(err.message);
-                else
-                    console.log("Created /FakeDrop folder in Downloads");
-            });
         cb(null, (0, getTransferFilename_1.default)(file.originalname));
     },
 });
-const upload = (0, multer_1.default)({ storage });
+const upload = (0, multer_1.default)({
+    storage,
+    limits: {
+        fieldSize: 1000000000,
+    },
+});
 exports.uploadMiddleware = upload.single("file");
 const uploadHandler = async (req, res, _next) => {
     var _a;
     console.log("Received file:", (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename);
     res.status(200);
+    res.send("OK");
+    res.end();
 };
 exports.default = uploadHandler;
 //# sourceMappingURL=upload.js.map
