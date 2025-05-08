@@ -1,51 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fakedrop - Client</title>
-    <link rel="stylesheet" href="../css/client.css">
-</head>
+    <link rel="stylesheet" href="../css/client.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="container">
-        <h1>FakeDrop</h1>
-        <p>
-            Your files will be sent to your computer.
-            <br>
-            Find them in the Downloads folder.
-        </p>
-        <div class="box">
-            <label for="file-input">Upload files</label>
-            <input type="file" name="files" id="file-input" multiple="multiple">
-        </div>
-
+      <h1>FakeDrop</h1>
+      <p>
+        Your files will be sent to your computer.
+        <br />
+        Find them in the Downloads folder.
+      </p>
+      <div class="box">
+        <label for="file-input">Upload files</label>
+        <input type="file" name="files" id="file-input" multiple="multiple" />
+      </div>
+      <div id="upload-container"></div>
     </div>
     <script id="handle-files">
-        const fileInput = document.getElementById("file-input")
-        fileInput.onchange = (event) => {
-            console.log("Added files")
-            const files = Array.from(event.target.files)
-            files.forEach((file) => {
-                uploadFile(file)
+      const fileInput = document.getElementById("file-input");
+      const fileContainer = document.getElementById("upload-container");
+
+      fileInput.onchange = (event) => {
+        console.log("Added files");
+        const files = Array.from(event.target.files);
+        event.target.value = null;
+        files.forEach((file) => {
+          uploadFile(file);
+        });
+      };
+
+      const uploadFile = async (file) => {
+        console.log("Sending:", file.name);
+
+        var data = new FormData();
+        data.append("file", file, file.name);
+
+        var newDiv = document.createElement("div");
+        newDiv.className = "upload-item";
+        newDiv.id = `upload-${file.name}`;
+        newDiv.textContent = file.name;
+        var newItalic = document.createElement("i");
+        newItalic.textContent = "0%";
+        fileContainer.append(newDiv);
+        newDiv.append(newItalic);
+
+        const request = fetchFormPost("/api/upload", data, (e) => {
+          console.log("progress");
+          const { loaded, total } = e;
+          newItalic.textContent = `${(loaded / total) * 100}%`;
+        });
+
+        return request;
+      };
+
+      async function fetchFormPost(url, data, onProgressChange) {
+        var xhr = new XMLHttpRequest();
+
+        return new Promise(function (success, failure) {
+          xhr.responseType = "blob";
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState != 4) {
+              // done
+              return;
+            }
+
+            var response = new Response(xhr.response, {
+              url: xhr.responseURL,
+              status: xhr.status,
+              statusText: xhr.statusText,
             });
-            event.target.value = null
-        }
 
-        const uploadFile = async (file) => {
+            success(response);
+          };
 
-            console.log("Sending:", file.name)
+          xhr.addEventListener("error", () => {
+            failure(new TypeError("Failed to fetch"));
+          });
 
-            var data = new FormData()
-            data.append('file', file, file.name)
+          xhr.upload.addEventListener("progress", onProgressChange);
+          xhr.upload.addEventListener("progress", (e) => console.log(e));
 
-            fetch(`/api/upload`, { method: "POST", body: data })
-                .then(response => console.log(response.text()))
-        }
+          xhr.open("post", url, true);
+          xhr.send(data);
+        });
+      }
     </script>
-
-</body>
-
+  </body>
 </html>
