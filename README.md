@@ -25,12 +25,8 @@ Just scan the QR code with your mobile device and send the files from your brows
   > `$ yarn build` or `$ npm run build`
 - run
   > `$ yarn start:prod` or `$ npm run start:prod`
-- optional:
-  - install it globally
-  - `$ npm install -g`
-  - `$ fakedrop`
 
-### Via npm/npx
+### Via npm/npx (doesn't work quite yet lmao)
 
 - install it globally
   > `$ npm install fakedrop -g`
